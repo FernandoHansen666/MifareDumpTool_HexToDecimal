@@ -1,42 +1,38 @@
-## Mifare Dump Converter
+# MIFARE Dump Analyzer - HexToDecimal
 
-### Overview:
+## Overview / Visão Geral
 
-This Python script facilitates the decoding of Mifare dump files obtained from Mifare Classic Tools, after extracting the keys from a proxmark device. Mifare cards use a specific scrambling method where the values are written in reverse order. This script separates blocks of hexadecimal values, reverses them to account for Mifare's inversion method, and converts them to decimal, displaying both hexadecimal and decimal representations.
+### EN
 
-### Usage:
+MIFARE Dump Analyzer is a tool for decoding, analyzing, and comparing Mifare Classic dump files. It is designed for users who have extracted card keys using hardware such as Proxmark3 or Chameleon Ultra and exported the data via Mifare Classic Tools (MCT).
 
-1. **Place the Script:** Place the script in the same directory as the Mifare dump file.
-2. **Execute the Script:** Run the script and provide the exact filename of the dump file.
-3. **Conversion Process:** The script will automatically process the dump file, providing the converted values in both hexadecimal and decimal formats.
+Since Mifare Value Blocks store numeric values in Little Endian format (reverse byte order), this application automatically reorders the bytes and converts them to decimal for easier interpretation.
 
-### Compatibility:
+### PT-BR
 
-- This script is designed to work with Mifare dump files obtained from Mifare Classic Tools, after extracting the keys from a proxmark device.
-- It simplifies the process of deciphering Mifare dump files, making it easier to analyze the data extracted from Mifare classic cards.
+MIFARE Dump Analyzer é uma ferramenta para decodificação, análise e comparação de arquivos de dump Mifare Classic. Ela foi projetada para usuários que já extraíram as chaves do cartão utilizando hardware como Proxmark3 ou Chameleon Ultra e exportaram os dados via Mifare Classic Tools (MCT).
 
+Como os Value Blocks do Mifare armazenam valores numéricos em formato Little Endian (ordem inversa dos bytes), esta aplicação reorganiza automaticamente os bytes e os converte para decimal para facilitar a interpretação.
 
-## PT-BR
+---
 
-### Visão Geral:
+## Features / Funcionalidades
 
-Este script em Python facilita a decodificação de arquivos de Dumps Mifare obtidos a partir da Mifare Classic Tools, após a extração das chaves de um quebradas pelo Proxmark. Os cartões Mifare usam um método de embaralhamento específico onde os valores são escritos na ordem inversa. Este script separa blocos de valores hexadecimais, os inverte para contabilizar o método de inversão do Mifare e os converte para decimal, exibindo representações em hexadecimal e decimal.
+* Modern GUI built with customtkinter (dark mode support)
+* Side-by-side comparison of two dumps
+* Automatic detection of valid Value Blocks (based on redundancy rules)
+* Advanced search for decimal and hexadecimal values
+* Synchronized scrolling between dump views
+* Color-coded visualization:
 
-### Uso:
+  * Red: Differences between Dump 1 and Dump 2
+  * Green: Valid Value Blocks
+  * Yellow: Search matches
 
-1. **Coloque o Script:** Coloque o script no mesmo diretório que o arquivo de Dump Mifare.
-2. **Execute o Script:** Execute o script e forneça o nome exato do arquivo de Dump.
-3. **Processo de Conversão:** O script processará automaticamente o arquivo de Dump, fornecendo os valores convertidos em formatos hexadecimal e decimal.
+---
 
-### Compatibilidade:
+## Compatibility / Compatibilidade
 
-- Este script é projetado para funcionar com arquivos de Dump Mifare obtidos da Mifare Classic Tools, após a extração das chaves do Proxmark.
-- Simplifica o processo de conversão de arquivos de Dump Mifare, tornando mais fácil analisar os dados extraídos de cartões Mifare.
+Compatible with dump files exported from Mifare Classic Tools (MCT) after key extraction via Proxmark3 or Chameleon Ultra.
 
-## Atenção:
-### Preste atenção no modelo de dump retirado do MCTools, ele deve ser igual o "ExemploModeloDeDump.mct" que disponibilizei!
-
-
-
-
-
+The dump model must follow the format of `ExemploModeloDeDump.mct`.
