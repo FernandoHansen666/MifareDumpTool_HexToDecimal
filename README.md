@@ -156,7 +156,9 @@ pip install customtkinter
 
 ## Screenshot
 
-Gui_Screenshot.png
+<p align="center">
+  <img src="Gui_Screenshot.png" width="700"/>
+</p>
 
 ---
 
