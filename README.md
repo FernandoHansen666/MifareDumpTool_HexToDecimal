@@ -4,35 +4,162 @@
 
 ### EN
 
-MIFARE Dump Analyzer is a tool for decoding, analyzing, and comparing Mifare Classic dump files. It is designed for users who have extracted card keys using hardware such as Proxmark3 or Chameleon Ultra and exported the data via Mifare Classic Tools (MCT).
+**MIFARE Dump Analyzer** is a tool for decoding, analyzing, and comparing **MIFARE Classic dump files**.
 
-Since Mifare Value Blocks store numeric values in Little Endian format (reverse byte order), this application automatically reorders the bytes and converts them to decimal for easier interpretation.
+It was designed for users who extract card data using hardware such as **Proxmark3**, **Chameleon Ultra**, or **Flipper Zero**, allowing analysis from multiple dump formats in a single interface.
+
+Since MIFARE Value Blocks store numeric values using **Little Endianness (reversed byte order)**, the application automatically reorders bytes and converts them into decimal values, making balance, counters, and stored credits easy to interpret.
+
+---
 
 ### PT-BR
 
-MIFARE Dump Analyzer é uma ferramenta para decodificação, análise e comparação de arquivos de dump Mifare Classic. Ela foi projetada para usuários que já extraíram as chaves do cartão utilizando hardware como Proxmark3 ou Chameleon Ultra e exportaram os dados via Mifare Classic Tools (MCT).
+O **MIFARE Dump Analyzer** é uma ferramenta para decodificação, análise e comparação de **dumps MIFARE Classic**.
 
-Como os Value Blocks do Mifare armazenam valores numéricos em formato Little Endian (ordem inversa dos bytes), esta aplicação reorganiza automaticamente os bytes e os converte para decimal para facilitar a interpretação.
+Ela foi desenvolvida para usuários que extraem dados de cartões utilizando dispositivos como **Proxmark3**, **Chameleon Ultra** ou **Flipper Zero**, permitindo analisar diferentes formatos de dump em uma única interface.
+
+Como os **Value Blocks** do MIFARE armazenam valores numéricos em **Little Endian (ordem invertida dos bytes)**, a aplicação reorganiza automaticamente os bytes e converte os valores para decimal, facilitando a leitura de saldos, contadores e créditos armazenados.
 
 ---
 
 ## Features / Funcionalidades
 
-* Modern GUI built with customtkinter (dark mode support)
-* Side-by-side comparison of two dumps
-* Automatic detection of valid Value Blocks (based on redundancy rules)
-* Advanced search for decimal and hexadecimal values
-* Synchronized scrolling between dump views
-* Color-coded visualization:
+- Modern GUI built with **customtkinter** (Dark Mode)
+- Side-by-side comparison between two dumps
+- Automatic **Value Block detection** (redundancy validation)
+- Automatic Little Endian → Decimal conversion
+- Advanced search (HEX and Decimal values)
+- Synchronized scrolling between dump views
+- Universal dump loader (multi-format support)
 
-  * Red: Differences between Dump 1 and Dump 2
-  * Green: Valid Value Blocks
-  * Yellow: Search matches
+### Color visualization
+
+* 🔴 **Red** → Differences between Dump 1 and Dump 2
+* 🟢 **Green** → Valid MIFARE Value Blocks detected
+* 🟡 **Yellow** → Search matches
+
+---
+
+## Dump Structure / Estrutura do Dump
+
+### EN
+
+Each MIFARE Classic block contains **16 bytes**, which are internally divided by the analyzer into four sections:
+
+* **D1** → Bytes 0–3
+* **D2** → Bytes 4–7
+* **D3** → Bytes 8–11
+* **D4** → Bytes 12–15
+
+This division helps visualize and validate **MIFARE Value Blocks** | The converted decimal value is displayed between parentheses (...)
+
+
+### PT-BR
+
+Cada bloco do MIFARE Classic possui **16 bytes**, que são divididos internamente pelo analisador em quatro partes:
+
+* **D1** → Bytes 0–3
+* **D2** → Bytes 4–7
+* **D3** → Bytes 8–11
+* **D4** → Bytes 12–15
+
+Essa divisão facilita a visualização e validação dos **Value Blocks do MIFARE** | Os valores convertidos em decimal ficam entre (...)
+
+---
+
+## Supported Formats / Formatos Suportados
+
+The analyzer now supports multiple industry-standard dump formats:
+
+### ✅ `.mct` / `.txt`
+
+Exported from:
+
+* **Mifare Classic Tools (Android)**
+* Proxmark3 conversions
+* Manual sector dumps
+
+---
+
+### ✅ `.json`
+
+Compatible with **Proxmark3 JSON exports**
+
+Example structure:
+
+```json
+{
+  "blocks": {
+    "0": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+    "1": "00000000000000000000000000000000"
+  }
+}
+```
+
+---
+
+### ✅ `.nfc`
+
+Compatible with **Flipper Zero NFC device dumps**
+
+Supports:
+
+* MIFARE Classic 1K
+* Sector/block automatic reconstruction
+* Unknown blocks (`??`) automatically ignored
 
 ---
 
 ## Compatibility / Compatibilidade
 
-Compatible with dump files exported from Mifare Classic Tools (MCT) after key extraction via Proxmark3 or Chameleon Ultra.
+Compatible with dumps generated after key extraction using:
 
-The dump model must follow the format of `ExemploModeloDeDump.mct`.
+* Proxmark3
+* Chameleon Ultra
+* Flipper Zero
+* Mifare Classic Tools (MCT)
+
+All formats are internally normalized into a unified sector/block structure for comparison.
+
+---
+
+## How It Works / Como Funciona
+
+1. Load Dump 1
+2. (Optional) Load Dump 2
+3. Analyzer automatically:
+
+   * Detects Value Blocks
+   * Converts values to Decimal
+   * Highlights differences
+   * Enables instant searching
+
+---
+
+## Use Cases / Casos de Uso
+
+* MIFARE Classic reverse engineering
+* Stored value analysis
+* Dump comparison after transactions
+* Card behavior testing
+* Security research & educational analysis
+
+---
+
+## Requirements
+
+```bash
+pip install customtkinter
+```
+
+---
+
+## Screenshot
+
+Gui_Screenshot.png
+
+---
+
+## License
+
+Educational and research purposes only.
